@@ -3,11 +3,11 @@
 Summary: A Perl module for inspecting Perl's symbol table.
 Name: perl-Devel-Symdump
 Version: 2.03
-Release: 13
+Release: 14
 License: distributable
 Group: Applications/CPAN
 Source0: Devel-Symdump-%{version}.tar.gz
-Url: http://www.cpan.org
+Url: http://search.cpan.org/search?query=Devel%3A%3ASymdump
 BuildRoot: /var/tmp/perl-Devel-Symdump-buildroot/
 BuildRequires: perl >= 0:5.00503
 Requires: perl >= 0:5.00503
