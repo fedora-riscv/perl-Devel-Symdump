@@ -3,7 +3,7 @@
 Summary: A Perl module for inspecting Perl's symbol table.
 Name: perl-Devel-Symdump
 Version: 2.03
-Release: 17
+Release: 19
 License: distributable
 Group: Applications/CPAN
 Source0: Devel-Symdump-%{version}.tar.gz
@@ -15,7 +15,7 @@ Provides: perl(Devel::Symdump)
 
 %description
 The perl module Devel::Symdump provides a convenient way to inspect
-perl's symbol table and the class hierarchie within a running program.
+perl's symbol table and the class hierarchy within a running program.
 
 # Provide perl-specific find-{provides,requires}.
 %define __find_provides /usr/lib/rpm/find-provides.perl
@@ -54,6 +54,12 @@ fi
 %dir /usr/lib/perl5/vendor_perl/%(perl -MConfig -e 'print $Config{version}')/Devel/Symdump
 
 %changelog
+* Tue Jun 15 2004 Elliot Lee <sopwith@redhat.com>
+- rebuilt
+
+* Tue May 11 2004 Chip Turner <cturner@redhat.com> 2.03-18
+- fix typo, bugzilla 122905
+
 * Thu Jun 05 2003 Elliot Lee <sopwith@redhat.com>
 - rebuilt
 
