@@ -1,7 +1,9 @@
+%define _use_internal_dependency_generator 0
+
 Summary: A Perl module for inspecting Perl's symbol table.
 Name: perl-Devel-Symdump
 Version: 2.03
-Release: 9
+Release: 12
 License: distributable
 Group: Applications/CPAN
 Source0: Devel-Symdump-%{version}.tar.gz
@@ -36,6 +38,8 @@ make install
 
 [ -x /usr/lib/rpm/brp-compress ] && /usr/lib/rpm/brp-compress
 
+find $RPM_BUILD_ROOT \( -name perllocal.pod -o -name .packlist \) -exec rm -v {} \;
+
 find $RPM_BUILD_ROOT/usr -type f -print | 
 	sed "s@^$RPM_BUILD_ROOT@@g" | 
 	grep -v perllocal.pod | 
@@ -47,7 +51,7 @@ fi
 
 %files -f Devel-Symdump-%{version}-filelist
 %defattr(-,root,root)
-%dir %{_libdir}/perl5/vendor_perl/%(perl -MConfig -e 'print $Config{version}')/Devel/Symdump
+%dir /usr/lib/perl5/vendor_perl/%(perl -MConfig -e 'print $Config{version}')/Devel/Symdump
 
 %changelog
 * Tue Aug  6 2002 Chip Turner <cturner@redhat.com>
