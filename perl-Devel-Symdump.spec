@@ -1,59 +1,56 @@
-%define _use_internal_dependency_generator 0
+Name:           perl-Devel-Symdump
+Version:        2.03
+Release:        20
+Summary:        A Perl module for inspecting Perl's symbol table
 
-Summary: A Perl module for inspecting Perl's symbol table.
-Name: perl-Devel-Symdump
-Version: 2.03
-Release: 20
-License: distributable
-Group: Applications/CPAN
-Source0: Devel-Symdump-%{version}.tar.gz
-Url: http://search.cpan.org/search?query=Devel%3A%3ASymdump
-BuildRoot: /var/tmp/perl-Devel-Symdump-buildroot/
-BuildRequires: perl >= 0:5.00503
-Requires: perl >= 0:5.00503
-Provides: perl(Devel::Symdump)
+Group:          Development/Libraries
+License:        GPL or Artistic
+Url:            http://search.cpan.org/dist/Devel-Symdump/
+Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+BuildArch:      noarch
+BuildRequires:  perl >= 1:5.6.1
+Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
 The perl module Devel::Symdump provides a convenient way to inspect
 perl's symbol table and the class hierarchy within a running program.
 
-# Provide perl-specific find-{provides,requires}.
-%define __find_provides /usr/lib/rpm/find-provides.perl
-%define __find_requires /usr/lib/rpm/find-requires.perl
 
 %prep
 %setup -q -n Devel-Symdump-%{version} 
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" perl Makefile.PL PREFIX=$RPM_BUILD_ROOT/usr INSTALLDIRS=vendor PREFIX=$RPM_BUILD_ROOT/usr INSTALLDIRS=vendor
-make
-make test
-
-%clean 
-rm -rf $RPM_BUILD_ROOT
+%{__perl} Makefile.PL INSTALLDIRS=vendor
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make install
+make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
+find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} ';'
+find $RPM_BUILD_ROOT -type d -depth -exec rmdir {} 2>/dev/null ';'
+chmod -R u+w $RPM_BUILD_ROOT/*
 
-find $RPM_BUILD_ROOT \( -name perllocal.pod -o -name .packlist \) -exec rm -v {} \;
+%check || :
+make test
 
-find $RPM_BUILD_ROOT/usr -type f -print | 
-	sed "s@^$RPM_BUILD_ROOT@@g" | 
-	grep -v perllocal.pod | 
-	grep -v "\.packlist" > Devel-Symdump-%{version}-filelist
-if [ "$(cat Devel-Symdump-%{version}-filelist)X" = "X" ] ; then
-    echo "ERROR: EMPTY FILE LIST"
-    exit -1
-fi
+%clean
+rm -rf $RPM_BUILD_ROOT
 
-%files -f Devel-Symdump-%{version}-filelist
-%defattr(-,root,root)
-%dir /usr/lib/perl5/vendor_perl/%(perl -MConfig -e 'print $Config{version}')/Devel/Symdump
+
+%files
+%defattr(-,root,root,-)
+%doc ChangeLog README
+%{perl_vendorlib}/Devel/
+%{_mandir}/man3/*.3*
+
 
 %changelog
-* Wed Mar 30 2005 Warren Togami <wtogami@redhat.com>
-- remove brp-compress
+* Wed Apr 20 2005 Jose Pedro Oliveira <jpo at di.uminho.pt> - 2.03-20
+- (#155463)
+- BuildArch correction (noarch).
+- Bring up to date with current Fedora.Extras perl spec template.
 
 * Tue Jun 15 2004 Elliot Lee <sopwith@redhat.com>
 - rebuilt
