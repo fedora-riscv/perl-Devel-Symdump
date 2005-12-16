@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.03
-Release:        20
+Release: 20.1
 Summary:        A Perl module for inspecting Perl's symbol table
 
 Group:          Development/Libraries
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Dec 16 2005 Jesse Keating <jkeating@redhat.com>
+- rebuilt for new gcj
+
 * Wed Apr 20 2005 Jose Pedro Oliveira <jpo at di.uminho.pt> - 2.03-20
 - (#155463)
 - BuildArch correction (noarch).
