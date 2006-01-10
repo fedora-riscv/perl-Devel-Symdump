@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
-Version:        2.03
-Release: 20.1.1
+Version:        2.05
+Release: 	1
 Summary:        A Perl module for inspecting Perl's symbol table
 
 Group:          Development/Libraries
@@ -11,7 +11,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
 BuildRequires:  perl >= 1:5.6.1
-Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires:  	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
 The perl module Devel::Symdump provides a convenient way to inspect
@@ -29,6 +29,7 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} ';'
+find $RPM_BUILD_ROOT -type f -name '*.bs' -a -size 0 -exec rm -f {} ';'
 find $RPM_BUILD_ROOT -type d -depth -exec rmdir {} 2>/dev/null ';'
 chmod -R u+w $RPM_BUILD_ROOT/*
 
@@ -42,11 +43,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(-,root,root,-)
 %doc ChangeLog README
-%{perl_vendorlib}/Devel/
+%{perl_vendorlib}/Devel/*
 %{_mandir}/man3/*.3*
 
 
 %changelog
+* Tue Jan 10 2006 Jason Vas Dias <jvdias@redhat.com> - 2.05-1
+- fix bug 176718: Upgrade to 2.05
+
 * Fri Dec 16 2005 Jesse Keating <jkeating@redhat.com>
 - rebuilt for new gcc
 
