@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
-Version:        2.0601
-Release: 	1
+Version:        2.0604
+Release: 	1%{?dist}
 Summary:        A Perl module for inspecting Perl's symbol table
 
 Group:          Development/Libraries
@@ -47,6 +47,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Dec 02 2006 Robin Norwood <rnorwood@redhat.com - 2.0604-1
+- Upgrade to latest CPAN version: 2.0604
+
 * Mon Jun 05 2006 Jason Vas Dias <jvdias@redhat.com> - 2.0601-1
 - Upgrade to 2.0601
 
