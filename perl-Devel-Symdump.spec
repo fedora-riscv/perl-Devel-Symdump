@@ -1,6 +1,7 @@
 Name:           perl-Devel-Symdump
-Version:        2.0604
-Release: 	1%{?dist}
+Version:        2.07
+Release:        1%{?dist}
+Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
 Group:          Development/Libraries
@@ -10,8 +11,7 @@ Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
-BuildRequires:  perl >= 1:5.6.1
-Requires:  	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
 The perl module Devel::Symdump provides a convenient way to inspect
@@ -19,7 +19,7 @@ perl's symbol table and the class hierarchy within a running program.
 
 
 %prep
-%setup -q -n Devel-Symdump-%{version} 
+%setup -q -n Devel-Symdump-%{version}
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
@@ -29,10 +29,10 @@ make %{?_smp_mflags}
 rm -rf $RPM_BUILD_ROOT
 make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} ';'
-find $RPM_BUILD_ROOT -type d -depth -exec rmdir {} 2>/dev/null ';'
+find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null ';'
 chmod -R u+w $RPM_BUILD_ROOT/*
 
-%check || :
+%check
 make test
 
 %clean
@@ -43,10 +43,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root,-)
 %doc ChangeLog README
 %{perl_vendorlib}/Devel/
-%{_mandir}/man3/*.3*
+%{_mandir}/man3/*.3pm*
 
 
 %changelog
+* Sat Feb  3 2007 Jose Pedro Oliveira <jpo at di.uminho.pt> - 1:2.07-1
+- Update to 2.07.
+- Minor corrections/cleanings.
+
 * Sat Dec 02 2006 Robin Norwood <rnorwood@redhat.com - 2.0604-1
 - Upgrade to latest CPAN version: 2.0604
 
