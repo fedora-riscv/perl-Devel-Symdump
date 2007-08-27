@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.07
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
