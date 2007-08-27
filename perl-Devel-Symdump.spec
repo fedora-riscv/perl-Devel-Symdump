@@ -5,7 +5,7 @@ Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
 Group:          Development/Libraries
-License:        GPL or Artistic
+License:        GPL+ or Artistic
 Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -47,11 +47,15 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Aug 27 2007 Robin Norwood <rnorwood@redhat.com> - 1:2.07-2
+- Fix license tag
+- Fix broken changelog entry
+
 * Sat Feb  3 2007 Jose Pedro Oliveira <jpo at di.uminho.pt> - 1:2.07-1
 - Update to 2.07.
 - Minor corrections/cleanings.
 
-* Sat Dec 02 2006 Robin Norwood <rnorwood@redhat.com - 2.0604-1
+* Sat Dec 02 2006 Robin Norwood <rnorwood@redhat.com> - 2.0604-1
 - Upgrade to latest CPAN version: 2.0604
 
 * Mon Jun 05 2006 Jason Vas Dias <jvdias@redhat.com> - 2.0601-1
