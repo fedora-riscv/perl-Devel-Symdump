@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.07
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
@@ -11,6 +11,7 @@ Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
+BuildRequires:  perl(ExtUtils::MakeMaker), perl(Test::More)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -47,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Wed Aug 29 2007 Robin Norwood <rnorwood@redhat.com> - 1:2.07-3
+- Add missing BuildRequires
+
 * Mon Aug 27 2007 Robin Norwood <rnorwood@redhat.com> - 1:2.07-2
 - Fix license tag
 - Fix broken changelog entry
