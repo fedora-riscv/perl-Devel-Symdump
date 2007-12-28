@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.07
-Release:        3%{?dist}
+Release:        3%{?dist}.1
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
@@ -12,6 +12,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
 BuildRequires:  perl(ExtUtils::MakeMaker), perl(Test::More)
+BuildRequires:  perl(Test::Pod)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -48,6 +49,11 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Fri Dec 28 2007 Patrice Dumas <pertusus@free.fr> - 1:2.07-3.1
+- Add BuildRequires Test::Pod. Don't add Test::Pod::Coverage, since 
+  Test::Pod::Coverage indirectly BuildRequires perl-Devel-Symdump
+  through Pod::Coverage
+
 * Wed Aug 29 2007 Robin Norwood <rnorwood@redhat.com> - 1:2.07-3
 - Add missing BuildRequires
 
