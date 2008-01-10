@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.07
-Release:        3%{?dist}
+Release:        4%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Thu Jan 10 2008 Tom "spot" Callaway <tcallawa@redhat.com> - 1:2.07-4
+- rebuild for new perl
+
 * Wed Aug 29 2007 Robin Norwood <rnorwood@redhat.com> - 1:2.07-3
 - Add missing BuildRequires
 
