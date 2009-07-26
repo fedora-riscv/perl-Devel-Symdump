@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.07
-Release:        6%{?dist}
+Release:        7%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sat Jul 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.07-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
+
 * Thu Feb 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.07-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
