@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.08
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 
@@ -48,6 +48,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Mon Dec  7 2009 Stepan Kasal <skasal@redhat.com> - 1:2.08-2
+- rebuild against perl 5.10.1
+
 * Mon Oct  5 2009 Stepan Kasal <skasal@redhat.com> - 1:2.08-1
 - new upstream version
 
