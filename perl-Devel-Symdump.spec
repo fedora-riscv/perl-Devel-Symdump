@@ -1,23 +1,26 @@
 Name:           perl-Devel-Symdump
 Version:        2.08
-Release:        7%{?dist}
+Release:        8%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
-
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildArch:      noarch
-BuildRequires:  perl(ExtUtils::MakeMaker), perl(Test::More)
+BuildRequires:  perl(Carp)
+BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Test::More)
+%if 0%{!?perl_bootstrap:1}
+BuildRequires:  perl(Test::Pod)
+BuildRequires:  perl(Test::Pod::Coverage)
+%endif
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
 The perl module Devel::Symdump provides a convenient way to inspect
 perl's symbol table and the class hierarchy within a running program.
-
 
 %prep
 %setup -q -n Devel-Symdump-%{version}
@@ -28,10 +31,10 @@ make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
+make pure_install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} ';'
-find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null ';'
-chmod -R u+w $RPM_BUILD_ROOT/*
+find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} ';' 2>/dev/null
+%{_fixperms} $RPM_BUILD_ROOT
 
 %check
 make test
@@ -39,15 +42,21 @@ make test
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-
 %files
 %defattr(-,root,root,-)
 %doc ChangeLog README
 %{perl_vendorlib}/Devel/
-%{_mandir}/man3/*.3pm*
-
+%{_mandir}/man3/Devel::Symdump.3pm*
 
 %changelog
+* Wed Jan 11 2012 Paul Howarth <paul@city-fan.org> - 1:2.08-8
+- Spec clean-up:
+  - Use DESTDIR rather than PERL_INSTALL_ROOT
+  - BR: perl(Carp)
+  - BR: perl(Test::Pod) and perl(Test::Pod::Coverage) if not bootstrapping
+  - Use %%{_fixperms} macro instead of our own chmod incantation
+  - Make %%files list more explicit
+
 * Fri Jun 17 2011 Marcela Mašláňová <mmaslano@redhat.com> - 1:2.08-7
 - Perl mass rebuild
 
@@ -55,7 +64,7 @@ rm -rf $RPM_BUILD_ROOT
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
 * Thu Dec 16 2010 Marcela Maslanova <mmaslano@redhat.com> - 1:2.08-5
-- 661697 rebuild for fixing problems with vendorach/lib
+- Rebuild to fix problems with vendorarch/lib (#661697)
 
 * Sat May 01 2010 Marcela Maslanova <mmaslano@redhat.com> - 1:2.08-4
 - Mass rebuild with perl-5.12.0
