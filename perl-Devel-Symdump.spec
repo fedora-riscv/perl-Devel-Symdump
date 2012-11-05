@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.08
-Release:        11%{?dist}
+Release:        12%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -16,6 +16,7 @@ BuildRequires:  perl(Test::More)
 BuildRequires:  perl(Test::Pod)
 BuildRequires:  perl(Test::Pod::Coverage)
 %endif
+Requires:       perl(Exporter)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -49,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Devel::Symdump.3pm*
 
 %changelog
+* Mon Nov  5 2012 Marcela Mašláňová <mmaslano@redhat.com> - 1:2.08-12
+- Add missing requirement - Exporter
+
 * Fri Jul 20 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.08-11
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
