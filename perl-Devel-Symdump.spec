@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.08
-Release:        12%{?dist}
+Release:        13%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -9,14 +9,15 @@ Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+BuildRequires:  perl(lib)
 BuildRequires:  perl(Carp)
+BuildRequires:  perl(Exporter)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::More)
 %if 0%{!?perl_bootstrap:1}
 BuildRequires:  perl(Test::Pod)
 BuildRequires:  perl(Test::Pod::Coverage)
 %endif
-Requires:       perl(Exporter)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -50,6 +51,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/Devel::Symdump.3pm*
 
 %changelog
+* Mon Nov 19 2012 Marcela Mašláňová <mmaslano@redhat.com> - 1:2.08-13
+- Change Exporter to BR, add lib dependency.
+
 * Mon Nov  5 2012 Marcela Mašláňová <mmaslano@redhat.com> - 1:2.08-12
 - Add missing requirement - Exporter
 
