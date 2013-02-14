@@ -14,6 +14,7 @@ BuildRequires:  perl(Carp)
 BuildRequires:  perl(Exporter)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::More)
+# Test::Pod::Coverage -> Pod::Coverage -> Devel::Symdump
 %if 0%{!?perl_bootstrap:1}
 BuildRequires:  perl(Test::Pod)
 BuildRequires:  perl(Test::Pod::Coverage)
