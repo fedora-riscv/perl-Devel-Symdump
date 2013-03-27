@@ -1,25 +1,30 @@
 Name:           perl-Devel-Symdump
-Version:        2.08
-Release:        14%{?dist}
+Version:        2.10
+Release:        1%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
 License:        GPL+ or Artistic
 Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
-BuildRequires:  perl(lib)
+BuildRequires:  perl
 BuildRequires:  perl(Carp)
+BuildRequires:  perl(English)
 BuildRequires:  perl(Exporter)
 BuildRequires:  perl(ExtUtils::MakeMaker)
+# File::Spec is optional and not really needed on Unices
+BuildRequires:  perl(lib)
+BuildRequires:  perl(strict)
 BuildRequires:  perl(Test::More)
 # Test::Pod::Coverage -> Pod::Coverage -> Devel::Symdump
 %if 0%{!?perl_bootstrap:1}
 BuildRequires:  perl(Test::Pod)
 BuildRequires:  perl(Test::Pod::Coverage)
 %endif
-Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+BuildRequires:  perl(vars)
+BuildRequires:  perl(warnings)
+Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
 
 %description
 The perl module Devel::Symdump provides a convenient way to inspect
@@ -29,29 +34,27 @@ perl's symbol table and the class hierarchy within a running program.
 %setup -q -n Devel-Symdump-%{version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-make pure_install DESTDIR=$RPM_BUILD_ROOT
-find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} ';'
-find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} ';' 2>/dev/null
-%{_fixperms} $RPM_BUILD_ROOT
+make pure_install DESTDIR=%{buildroot}
+find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
+%{_fixperms} %{buildroot}
 
 %check
 make test
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
-%defattr(-,root,root,-)
-%doc ChangeLog README
+%doc Changes README
 %{perl_vendorlib}/Devel/
 %{_mandir}/man3/Devel::Symdump.3pm*
 
 %changelog
+* Wed Mar 27 2013 Petr Šabata <contyk@redhat.com> - 1:2.10-1
+- 2.10 bump
+- Minor cleanup
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.08-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
