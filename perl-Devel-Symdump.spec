@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
-Version:        2.11
-Release:        2%{?dist}
+Version:        2.12
+Release:        1%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -10,6 +10,7 @@ Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version
 BuildArch:      noarch
 BuildRequires:  perl
 BuildRequires:  perl(Carp)
+BuildRequires:  perl(Compress::Zlib)
 BuildRequires:  perl(English)
 BuildRequires:  perl(Exporter)
 BuildRequires:  perl(ExtUtils::MakeMaker)
@@ -51,6 +52,11 @@ make test
 %{_mandir}/man3/Devel::Symdump.3pm*
 
 %changelog
+* Sun Jun 22 2014 Paul Howarth <paul@city-fan.org> - 1:2.12-1
+- Update to 2.12
+  - v5.21.0-424-ge35475d stopped supporting defined(@$ref), which was used in
+    t/symdump.t
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.11-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
