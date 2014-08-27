@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.12
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -52,6 +52,9 @@ make test
 %{_mandir}/man3/Devel::Symdump.3pm*
 
 %changelog
+* Wed Aug 27 2014 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.12-2
+- Perl 5.20 rebuild
+
 * Sun Jun 22 2014 Paul Howarth <paul@city-fan.org> - 1:2.12-1
 - Update to 2.12
   - v5.21.0-424-ge35475d stopped supporting defined(@$ref), which was used in
