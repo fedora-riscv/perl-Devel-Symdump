@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
-Version:        2.12
-Release:        3%{?dist}
+Version:        2.14
+Release:        1%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -9,8 +9,10 @@ Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
 BuildArch:      noarch
 BuildRequires:  perl
+BuildRequires:  perl(B)
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(Compress::Zlib)
+BuildRequires:  perl(Config)
 BuildRequires:  perl(English)
 BuildRequires:  perl(Exporter)
 BuildRequires:  perl(ExtUtils::MakeMaker)
@@ -20,12 +22,13 @@ BuildRequires:  perl(strict)
 BuildRequires:  perl(Test::More)
 # Test::Pod::Coverage -> Pod::Coverage -> Devel::Symdump
 %if 0%{!?perl_bootstrap:1}
-BuildRequires:  perl(Test::Pod)
+BuildRequires:  perl(Test::Pod) >= 1.00
 BuildRequires:  perl(Test::Pod::Coverage)
 %endif
 BuildRequires:  perl(vars)
 BuildRequires:  perl(warnings)
 Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
+Requires:       perl(B)
 
 %description
 The perl module Devel::Symdump provides a convenient way to inspect
@@ -52,6 +55,9 @@ make test
 %{_mandir}/man3/Devel::Symdump.3pm*
 
 %changelog
+* Thu Dec 18 2014 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.14-1
+- 2.14 bump
+
 * Sun Sep 07 2014 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.12-3
 - Perl 5.20 re-rebuild of bootstrapped packages
 
