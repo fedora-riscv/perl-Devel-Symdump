@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
-Version:        2.14
-Release:        3%{?dist}
+Version:        2.15
+Release:        1%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -8,25 +8,34 @@ License:        GPL+ or Artistic
 Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
 BuildArch:      noarch
+# Module Build
 BuildRequires:  perl
+BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(File::Spec)
+# Module Runtime
 BuildRequires:  perl(B)
 BuildRequires:  perl(Carp)
-BuildRequires:  perl(Compress::Zlib)
 BuildRequires:  perl(Config)
-BuildRequires:  perl(English)
+BuildRequires:  perl(constant)
 BuildRequires:  perl(Exporter)
-BuildRequires:  perl(ExtUtils::MakeMaker)
-# File::Spec is optional and not really needed on Unices
-BuildRequires:  perl(lib)
 BuildRequires:  perl(strict)
+BuildRequires:  perl(vars)
+# Test Suite
+BuildRequires:  perl(English)
+BuildRequires:  perl(lib)
+BuildRequires:  perl(Test::Harness) >= 3.04
 BuildRequires:  perl(Test::More)
-# Test::Pod::Coverage -> Pod::Coverage -> Devel::Symdump
+BuildRequires:  perl(warnings)
+# Release Tests
 %if 0%{!?perl_bootstrap:1}
+# Compress::Zlib (IO-Compress) ⇒ Test::NoWarnings ⇒ Devel::StackTrace ⇒
+#   Test::NoTabs ⇒ Test::Pod::Coverage ⇒ Pod::Coverage ⇒ Devel::Symdump
+BuildRequires:  perl(Compress::Zlib)
 BuildRequires:  perl(Test::Pod) >= 1.00
+# Test::Pod::Coverage ⇒ Pod::Coverage ⇒ Devel::Symdump
 BuildRequires:  perl(Test::Pod::Coverage)
 %endif
-BuildRequires:  perl(vars)
-BuildRequires:  perl(warnings)
+# Runtime
 Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
 Requires:       perl(B)
 
@@ -49,12 +58,23 @@ find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 %check
 make test
 
+# Release tests
+%if 0%{!?perl_bootstrap:1}
+prove t/pod.t t/podcover.t t/glob_to_local_typeglob.t :: --doit
+%endif
+
 %files
 %doc Changes README
 %{perl_vendorlib}/Devel/
-%{_mandir}/man3/Devel::Symdump.3pm*
+%{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Sat Jun 13 2015 Paul Howarth <paul@city-fan.org> - 1:2.15-1
+- Update to 2.15
+  - In the tests, always check for exists before checking for definedness
+- Classify buildreqs by usage
+- Run the release tests unless we're bootstrapping
+
 * Wed Jun 10 2015 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.14-3
 - Perl 5.22 re-rebuild of bootstrapped packages
 
