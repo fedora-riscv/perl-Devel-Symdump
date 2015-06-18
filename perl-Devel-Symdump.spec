@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.15
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -69,6 +69,9 @@ prove t/pod.t t/podcover.t t/glob_to_local_typeglob.t :: --doit
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.15-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
 * Sat Jun 13 2015 Paul Howarth <paul@city-fan.org> - 1:2.15-1
 - Update to 2.15
   - In the tests, always check for exists before checking for definedness
