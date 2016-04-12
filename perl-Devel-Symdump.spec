@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
-Version:        2.15
-Release:        3%{?dist}
+Version:        2.16
+Release:        1%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -9,6 +9,9 @@ Url:            http://search.cpan.org/dist/Devel-Symdump/
 Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
 BuildArch:      noarch
 # Module Build
+BuildRequires:  coreutils
+BuildRequires:  findutils
+BuildRequires:  make
 BuildRequires:  perl
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(File::Spec)
@@ -52,7 +55,7 @@ make %{?_smp_mflags}
 
 %install
 make pure_install DESTDIR=%{buildroot}
-find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
+find %{buildroot} -type f -name .packlist -delete
 %{_fixperms} %{buildroot}
 
 %check
@@ -69,6 +72,11 @@ prove t/pod.t t/podcover.t t/glob_to_local_typeglob.t :: --doit
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Tue Apr 12 2016 Paul Howarth <paul@city-fan.org> - 1:2.16-1
+- Update to 2.16
+  - docs only change: create a real link to perlref.pod
+- Simplify find command using -delete
+
 * Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.15-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
