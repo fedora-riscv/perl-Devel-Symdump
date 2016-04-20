@@ -1,5 +1,5 @@
 Name:           perl-Devel-Symdump
-Version:        2.16
+Version:        2.17
 Release:        1%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
@@ -29,7 +29,7 @@ BuildRequires:  perl(lib)
 BuildRequires:  perl(Test::Harness) >= 3.04
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(warnings)
-# Release Tests
+# Author Tests
 %if 0%{!?perl_bootstrap:1}
 # Compress::Zlib (IO-Compress) ⇒ Test::NoWarnings ⇒ Devel::StackTrace ⇒
 #   Test::NoTabs ⇒ Test::Pod::Coverage ⇒ Pod::Coverage ⇒ Devel::Symdump
@@ -59,12 +59,7 @@ find %{buildroot} -type f -name .packlist -delete
 %{_fixperms} %{buildroot}
 
 %check
-make test
-
-# Release tests
-%if 0%{!?perl_bootstrap:1}
-prove t/pod.t t/podcover.t t/glob_to_local_typeglob.t :: --doit
-%endif
+make test %{!?perl_bootstrap:AUTHOR_TEST=1}
 
 %files
 %doc Changes README
@@ -72,6 +67,12 @@ prove t/pod.t t/podcover.t t/glob_to_local_typeglob.t :: --doit
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Wed Apr 20 2016 Paul Howarth <paul@city-fan.org> - 1:2.17-1
+- Update to 2.17
+  - Unlist Compress::Zlib as a prereq; it was and still is only used by a test
+    that won't run for normal user installs (CPAN RT#113886)
+- Author tests now require AUTHOR_TEST variable rather than --doit parameter
+
 * Tue Apr 12 2016 Paul Howarth <paul@city-fan.org> - 1:2.16-1
 - Update to 2.16
   - docs only change: create a real link to perlref.pod
