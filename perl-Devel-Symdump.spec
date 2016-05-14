@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.17
-Release:        1%{?dist}
+Release:        2%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -67,6 +67,9 @@ make test %{!?perl_bootstrap:AUTHOR_TEST=1}
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Sat May 14 2016 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.17-2
+- Perl 5.24 rebuild
+
 * Wed Apr 20 2016 Paul Howarth <paul@city-fan.org> - 1:2.17-1
 - Update to 2.17
   - Unlist Compress::Zlib as a prereq; it was and still is only used by a test
