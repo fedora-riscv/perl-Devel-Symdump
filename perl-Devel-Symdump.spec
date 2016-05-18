@@ -1,6 +1,6 @@
 Name:           perl-Devel-Symdump
 Version:        2.17
-Release:        2%{?dist}
+Release:        3%{?dist}
 Epoch:          1
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
@@ -67,6 +67,9 @@ make test %{!?perl_bootstrap:AUTHOR_TEST=1}
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Wed May 18 2016 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.17-3
+- Perl 5.24 re-rebuild of bootstrapped packages
+
 * Sat May 14 2016 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.17-2
 - Perl 5.24 rebuild
 
