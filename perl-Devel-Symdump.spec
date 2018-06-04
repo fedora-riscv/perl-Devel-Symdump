@@ -5,8 +5,8 @@ Release:        5%{?dist}
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
 License:        GPL+ or Artistic
-Url:            http://search.cpan.org/dist/Devel-Symdump/
-Source0:        http://www.cpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
+Url:            https://metacpan.org/release/Devel-Symdump
+Source0:        https://cpan.metacpan.org/authors/id/A/AN/ANDK/Devel-Symdump-%{version}.tar.gz
 BuildArch:      noarch
 # Module Build
 BuildRequires:  coreutils
