@@ -1,7 +1,7 @@
 Name:           perl-Devel-Symdump
 Epoch:          1
 Version:        2.18
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        A Perl module for inspecting Perl's symbol table
 Group:          Development/Libraries
 License:        GPL+ or Artistic
@@ -67,6 +67,9 @@ make test %{!?perl_bootstrap:AUTHOR_TEST=1}
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.18-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Sun Jul 01 2018 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.18-7
 - Perl 5.28 re-rebuild of bootstrapped packages
 
