@@ -1,7 +1,7 @@
 Name:           perl-Devel-Symdump
 Epoch:          1
 Version:        2.18
-Release:        22%{?dist}
+Release:        23%{?dist}
 Summary:        A Perl module for inspecting Perl's symbol table
 License:        GPL+ or Artistic
 Url:            https://metacpan.org/release/Devel-Symdump
@@ -66,6 +66,9 @@ make test %{!?perl_bootstrap:AUTHOR_TEST=1}
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Fri Jun 03 2022 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.18-23
+- Perl 5.36 re-rebuild of bootstrapped packages
+
 * Mon May 30 2022 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.18-22
 - Perl 5.36 rebuild
 
