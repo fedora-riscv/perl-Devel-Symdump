@@ -1,7 +1,8 @@
+%global perl_bootstrap 1
 Name:           perl-Devel-Symdump
 Epoch:          1
 Version:        2.18
-Release:        24%{?dist}
+Release:        24~bootstrap%{?dist}
 Summary:        A Perl module for inspecting Perl's symbol table
 License:        GPL+ or Artistic
 Url:            https://metacpan.org/release/Devel-Symdump
@@ -66,6 +67,9 @@ make test %{!?perl_bootstrap:AUTHOR_TEST=1}
 %{_mandir}/man3/Devel::Symdump.3*
 
 %changelog
+* Mon Dec 12 2022 Liu Yang  <Yang.Liu.sn@gmail.com> - 1:2.18-24~bootstrap
+- for Perl 5.36 bootstrap on riscv64.
+
 * Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 1:2.18-24
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
 
